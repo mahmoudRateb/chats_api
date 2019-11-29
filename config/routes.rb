@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'chats/create'
+  get 'chats/update'
+  get 'chats/show'
+  get 'chats/index'
   # get 'applications/create'
   # get 'applications/update'
   # get 'applications/show'

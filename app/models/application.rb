@@ -1,6 +1,8 @@
 class Application < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
+  has_many :chats
+  
   def Application.new_token
     SecureRandom.urlsafe_base64
   end
