@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-	  # Function that that is used in the case of response
+	 # Function that that is used in the case of response
   # It takes in the resource and prepares a proper json
   # response for returning
   def render_json_success(resource)
