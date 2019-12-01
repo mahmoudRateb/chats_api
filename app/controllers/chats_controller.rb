@@ -24,6 +24,9 @@ class ChatsController < ApplicationController
 
   def set_application
   	@application = Application.find_by(token: params[:application_id])
+    if !@application
+      render_not_found_error "Application"
+    end
   end
 
   def chats_count

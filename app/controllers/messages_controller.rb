@@ -25,11 +25,17 @@ class MessagesController < ApplicationController
   end
 
   def set_application
-  	@application = Application.find_by(token: params[:application_id])
+    @application = Application.find_by(token: params[:application_id])
+    if !@application
+      render_not_found_error "Application"
+    end
   end
 
   def set_chat
   	@chat = @application.chats.find_by(number: params[:chat_id])
+    if !@chat
+      render_not_found_error "Chat"
+    end
   end
 
   def msgs_count

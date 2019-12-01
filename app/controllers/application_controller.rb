@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-	 # Function that that is used in the case of response
+  # Function that that is used in the case of response
   # It takes in the resource and prepares a proper json
   # response for returning
   def render_json_success(resource)
@@ -30,5 +30,15 @@ class ApplicationController < ActionController::API
         data: errors
       }
     }, status: 422
+  end
+
+  def render_not_found_error(model_name)
+    render json: {
+      status: "error",
+      error: {
+        status: "error",
+        name: model_name + " not found",
+      }
+    }, status: 404
   end
 end

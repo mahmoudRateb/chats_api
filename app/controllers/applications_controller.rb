@@ -17,13 +17,7 @@ class ApplicationsController < ApplicationController
     if @application
       render_json_success @application
     else
-      render json: {
-        status: "error",
-        error: {
-          status: "error",
-          name: "Application not found",
-        }
-      }, status: 400
+      render_not_found_error "Application"
     end
   end
 
