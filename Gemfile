@@ -12,6 +12,13 @@ gem 'bcrypt', '3.1.12'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+
+#Elastic search
+gem 'elasticsearch-model', '~> 7.0.0'
+
+#Faker is used for generating fake data to populate the db
+gem 'faker'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production

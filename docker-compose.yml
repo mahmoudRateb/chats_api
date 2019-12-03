@@ -1,5 +1,19 @@
 version: '3'
 services:
+  web:
+    build: .
+    entrypoint: /myapp/entrypoint.sh
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      WAIT_HOSTS: db:3306, elasticsearch:9200
+      WAIT_HOSTS_TIMEOUT: 60
+      WAIT_SLEEP_INTERVAL: 2
   db:
    image: "mysql:5.7"
    environment:
@@ -8,12 +22,23 @@ services:
      MYSQL_PASSWORD: root
    ports:
       - "3307:3306"
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
+  elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+      environment:
+        - discovery.type=single-node
+        # - cluster.name=docker-cluster
+        # - bootstrap.memory_lock=true
+        # - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        # - xpack.security.enabled=false
+        # - xpack.monitoring.enabled=false
+        # - xpack.graph.enabled=false
+        # - xpack.watcher.enabled=false
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      # volumes:
+      #   - ./docker_data/elasticsearch/data:/usr/share/elasticsearch/data
+      ports:
+        - 9200:9200
+
