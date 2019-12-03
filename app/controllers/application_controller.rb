@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   # response for returning
   # Except can be passed to this function to remove attributes from the repsonsae.
   # The default for except is id though, meaning :id is removed from the json response by default
-  def render_json_success(resource, except = [:id])
+  def render_json_success(resource, except = [:id, :application_id, :chat_id])
     render json: {
       status: "success",
       data: resource

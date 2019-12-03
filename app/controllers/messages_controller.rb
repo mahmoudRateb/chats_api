@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
   def search
     term = search_params
     @messages = Message.search_in_chat(term, @chat.id)
-    render_json_success(@messages)
+    render_json_success(@messages, [:id, :_score, :_id, :_type, :_index, :chat_id])
   end
 
   def set_application
@@ -68,4 +68,5 @@ class MessagesController < ApplicationController
   def search_params
     params.require(:term)
   end
+  
 end
