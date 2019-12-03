@@ -4,12 +4,11 @@ set -e
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /myapp/tmp/pids/server.pid
 
+# Scriopt to make sure that web waits for the containers that it depends on until they are ready
 ./../wait
 
 # If the database exists, migrate. Otherwise setup (create and migrate)
 bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate
-echo "Created database. Will attempt seeding now.."
-bundle exec rake db:seed
 echo "Done!"
 
 

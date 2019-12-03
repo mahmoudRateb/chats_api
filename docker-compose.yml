@@ -26,6 +26,8 @@ services:
      MYSQL_PASSWORD: root
    ports:
       - "3307:3306"
+   volumes: 
+      - ./docker_data/mysql/data:/usr/share/mysql/data
   elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
       environment:
