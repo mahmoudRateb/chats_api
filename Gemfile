@@ -19,6 +19,12 @@ gem 'elasticsearch-model', '~> 7.0.0'
 #Faker is used for generating fake data to populate the db
 gem 'faker'
 
+#sidekiq
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'sidekiq-unique-jobs'
+gem 'sinatra', require: nil
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
