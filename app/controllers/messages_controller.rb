@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
 
   def show
     @msg = @chat.messages.find_by(msg_number: params[:id])
-    render_json_success(@msg)
+    render_json_success(@msg._source)
   end
 
   def index

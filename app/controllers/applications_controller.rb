@@ -10,6 +10,13 @@ class ApplicationsController < ApplicationController
   end
 
   def update
+    @application = Application.find_by(token: params[:id])
+    @application.update_attributes(app_params)
+    if @application.save
+      render_json_success(@application)
+    else
+      render_json_validation_errors(@application)
+    end
   end
 
   def show
