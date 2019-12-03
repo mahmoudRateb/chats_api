@@ -3,25 +3,25 @@ class MessagesController < ApplicationController
   before_action :set_chat
 
   def create
-  	@msg = @chat.messages.new(msg_params)
-  	@msg.msg_number = msgs_count + 1
-  	if @msg.save
-  		render_json_success(@msg)
-  	else 
-  		render_json_errors(@msg)
-  	end
+    @msg = @chat.messages.new(msg_params)
+    @msg.msg_number = msgs_count + 1
+    if @msg.save
+      render_json_success(@msg)
+    else
+      render_json_errors(@msg)
+    end
   end
 
   def update
   end
 
   def show
-  	@msg = @chat.messages.find_by(msg_number: params[:id])
-  	render_json_success(@msg)
+    @msg = @chat.messages.find_by(msg_number: params[:id])
+    render_json_success(@msg)
   end
 
   def index
-  	render_json_success(@chat.messages)
+    render_json_success(@chat.messages)
   end
 
   def set_application
@@ -31,18 +31,28 @@ class MessagesController < ApplicationController
     end
   end
 
+  def search
+    term = search_params
+    @messages = Message.search_in_chat(term, @chat.id)
+    render_json_success(@messages)
+  end
+
   def set_chat
-  	@chat = @application.chats.find_by(number: params[:chat_id])
+    @chat = @application.chats.find_by(number: params[:chat_id])
     if !@chat
       render_not_found_error "Chat"
     end
   end
 
   def msgs_count
-  	@count = @chat.messages.count
+    @count = @chat.messages.count
   end
 
   def msg_params
-  	params.require(:message).permit(:content)
+    params.require(:message).permit(:content)
+  end
+
+  def search_params
+    params.require(:term)
   end
 end
