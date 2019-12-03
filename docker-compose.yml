@@ -1,5 +1,7 @@
 version: '3'
 services:
+  redis:
+    image: redis:4.0.14-alpine
   web:
     build: .
     entrypoint: /myapp/entrypoint.sh
@@ -9,10 +11,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     environment:
       WAIT_HOSTS: db:3306, elasticsearch:9200
       WAIT_HOSTS_TIMEOUT: 60
       WAIT_SLEEP_INTERVAL: 2
+    env_file:
+      - .env
   db:
    image: "mysql:5.7"
    environment:
@@ -34,4 +39,5 @@ services:
         - ./docker_data/elasticsearch/data:/usr/share/elasticsearch/data
       ports:
         - 9200:9200
+
 
