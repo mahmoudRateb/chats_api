@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
 Things you may want to cover:
 
-* Ruby version
+* Clone the project
 
-* System dependencies
+* Change directory to the folder containing the project ("cd chats_api")
 
-* Configuration
+* Type "docker-compose up" and wait for the project to build
 
-* Database creation
+* For seeding the database: 1. Type "docker-compose exec web bash" 
+ 2. Type "rails db:seed" 
+ This seeds the database with some messages to be able to properly test searching
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
